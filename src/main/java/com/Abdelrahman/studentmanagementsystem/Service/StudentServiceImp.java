@@ -2,10 +2,12 @@ package com.Abdelrahman.studentmanagementsystem.Service;
 
 import com.Abdelrahman.studentmanagementsystem.Dao.StudentRepo;
 import com.Abdelrahman.studentmanagementsystem.Entity.Student;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class StudentServiceImp implements StudentService {
 
     private StudentRepo studentRepo;
