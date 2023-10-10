@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <title>Student Directory</title>
+</head>
+<body>
+<div class="container">
+
+    <br>
+    <h3>Student Directory</h3>
+    <br>
+
+    <a th:href="@{/students/showFormForAdd}"
+       class="btn btn-primary btn-sm mb-3">
+        Add Student
+    </a>
+
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Update</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="tempStudent : ${students}">
+
+            <td th:text="${tempStudent.firstName}"/>
+            <td th:text="${tempStudent.lastName}"/>
+            <td th:text="${tempStudent.email}"/>
+
+            <td>
+                <a th:href="@{/students/showFormForUpdate(studentId=${tempStudent.id})}"
+                   class="btn btn-primary btn-sm">
+                    Update
+                </a>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+</body>
+</html>
