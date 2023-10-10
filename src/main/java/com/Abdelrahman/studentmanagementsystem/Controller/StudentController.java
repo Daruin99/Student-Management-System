@@ -4,10 +4,7 @@ import com.Abdelrahman.studentmanagementsystem.Entity.Student;
 import com.Abdelrahman.studentmanagementsystem.Service.StudentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,7 +26,7 @@ public class StudentController {
     }
 
     @GetMapping("/showFormForAdd")
-    public String displayForm(Model theModel) {
+    public String addForm(Model theModel) {
         Student student = new Student();
         theModel.addAttribute("student", student);
         return "student-form";
@@ -39,5 +36,12 @@ public class StudentController {
     public String save(@ModelAttribute("student") Student student) {
         studentService.save(student);
         return "redirect:/students/list";
+    }
+
+    @GetMapping("/showFormForUpdate")
+    public String updateForm(@RequestParam("studentId") int studentId, Model theModel) {
+        Student theStudent = studentService.findById(studentId);
+        theModel.addAttribute("student", theStudent);
+        return "student-form";
     }
 }
