@@ -44,4 +44,9 @@ public class StudentController {
         theModel.addAttribute("student", theStudent);
         return "student-form";
     }
+    @GetMapping("/deleteById")
+    public String deleteById(@RequestParam("studentId") int studentId) {
+        studentService.deleteById(studentId);
+        return "display-students";
+    }
 }
