@@ -2,8 +2,10 @@ package com.Abdelrahman.studentmanagementsystem.Controller;
 
 import com.Abdelrahman.studentmanagementsystem.Entity.Student;
 import com.Abdelrahman.studentmanagementsystem.Service.StudentService;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,7 +35,12 @@ public class StudentController {
     }
 
     @PostMapping("/save")
-    public String save(@ModelAttribute("student") Student student) {
+    public String save(@Valid @ModelAttribute("student") Student student, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            return "student-form";
+        }
+
         studentService.save(student);
         return "redirect:/students/list";
     }
@@ -47,6 +54,6 @@ public class StudentController {
     @GetMapping("/deleteById")
     public String deleteById(@RequestParam("studentId") int studentId) {
         studentService.deleteById(studentId);
-        return "redirect:/students/displayStudents";
+        return "redirect:/students/list";
     }
 }

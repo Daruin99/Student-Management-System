@@ -1,6 +1,7 @@
 package com.Abdelrahman.studentmanagementsystem.Entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
 @Entity
 @Table(name = "student")
@@ -12,13 +13,29 @@ public class Student {
     private int id;
 
     @Column(name = "first_name")
+    @NotNull(message = "This field is required")
+    @Size(min = 1, message = "This field is required")
     private String firstName;
 
     @Column(name = "last_name")
+    @NotNull(message = "This field is required")
+    @Size(min = 1, message = "This field is required")
+
     private String lastName;
 
     @Column(name = "email")
+    @NotNull(message = "This field is required")
+    @Size(min = 1, message = "This field is required")
+    @Email(message = "Enter a valid email format")
     private String email;
+
+    @Column(name = "grade")
+    @Min(value = 0, message = "Enter a value greater than 0")
+    @Max(value = 100 , message = "Enter a value less than 100")
+    private Integer grade;
+
+    
+
 
     public Student() {
     }
@@ -60,5 +77,13 @@ public class Student {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Integer getGrade() {
+        return grade;
+    }
+
+    public void setGrade(Integer grade) {
+        this.grade = grade;
     }
 }
