@@ -2,6 +2,7 @@ package com.Abdelrahman.studentmanagementsystem.Service;
 
 import com.Abdelrahman.studentmanagementsystem.Dao.StudentRepo;
 import com.Abdelrahman.studentmanagementsystem.Entity.Student;
+import com.Abdelrahman.studentmanagementsystem.Entity.Teacher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -44,5 +45,11 @@ public class StudentServiceImp implements StudentService {
     @Override
     public List<Student> findAll() {
         return studentRepo.findAll();
+    }
+
+
+    @Override
+    public List<Student> findByTeacher(Teacher teacher){
+        return studentRepo.findByTeacher(teacher);
     }
 }

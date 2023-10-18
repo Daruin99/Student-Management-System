@@ -12,12 +12,12 @@ public class Student {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "first_name")
+    @Column(name = "firstName")
     @NotNull(message = "This field is required")
     @Size(min = 1, message = "This field is required")
     private String firstName;
 
-    @Column(name = "last_name")
+    @Column(name = "lastName")
     @NotNull(message = "This field is required")
     @Size(min = 1, message = "This field is required")
 
@@ -34,18 +34,22 @@ public class Student {
     @Max(value = 100 , message = "Enter a value less than 100")
     private Integer grade;
 
-    
 
+    @ManyToOne
+    @JoinColumn(name = "teacher_user_name")
+    private Teacher teacher;
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
+    }
 
     public Student() {
     }
 
-    public Student(int id, String firstName, String lastName, String email) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-    }
 
     public int getId() {
         return id;
