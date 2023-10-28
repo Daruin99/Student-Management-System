@@ -1,6 +1,9 @@
 package com.Abdelrahman.studentmanagementsystem.Entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 import java.util.List;
 
@@ -9,15 +12,17 @@ import java.util.List;
 public class Teacher {
 
 
-    /*
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
-     */
 
-    @Id
-    @Column(name = "user_name")
+
+
+    @Column(name = "user_name", unique = true)
+    @NotNull(message = "This field is required")
+    @Size(min = 1, message = "This field is required")
     private String userName;
 
     @Column(name = "password")
@@ -60,7 +65,6 @@ public class Teacher {
         this.password = password;
     }
 
-    /*
     public int getId() {
         return id;
     }
@@ -68,5 +72,5 @@ public class Teacher {
     public void setId(int id) {
         this.id = id;
     }
-     */
+
 }

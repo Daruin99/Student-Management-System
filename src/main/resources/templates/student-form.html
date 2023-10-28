@@ -3,64 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Add a student</title>
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
-        .error{
-
-            color:red;
-
+        body {
+            background-color: #f8f9fa;
+        }
+        .error {
+            color: red;
+        }
+        .form-control {
+            margin-bottom: 10px;
+        }
+        .btn-info {
+            background-color: #17a2b8;
+            border-color: #17a2b8;
         }
     </style>
 
-    <title>Student Form</title></head>
-<body class=".bg-light">
+    <title>Student Form</title>
+</head>
+<body>
 
-<br><br>
-<form th:action="@{/students/save}"
-      th:object="${student}" method="POST" class="ml-12">
+<div class="container mt-5">
+    <form th:action="@{/students/save}"
+          th:object="${student}" method="POST">
 
-    <input type="hidden" th:field="*{id}">
+        <div class="form-group">
+            <div class="col-xs-15">
+                <div>
+                    <!-- Check for duplicate Email error -->
 
-    <input type="text" th:field="*{firstName}" placeholder="First Name"
-           class="form-control w-25">
+                    <div th:if="${error}">
 
+                        <div class="alert alert-danger col-xs-offset-1 col-xs-10">
+                            This Email exists!
+                        </div>
 
-    <span th:if="${#fields.hasErrors('firstName')}"
-          th:errors="*{firstName}"
-          class="error"></span>
+                    </div>
 
-    <br>
+                </div>
+            </div>
+        </div>
 
+        <input type="hidden" th:field="*{id}">
 
-    <input type="text" th:field="*{lastName}" placeholder="Last name"
-           class="form-control w-25">
+        <div class="form-group">
+            <input type="text" th:field="*{firstName}" placeholder="First Name"
+                   class="form-control">
+            <span th:if="${#fields.hasErrors('firstName')}"
+                  th:errors="*{firstName}"
+                  class="error"></span>
+        </div>
 
-    <span th:if="${#fields.hasErrors('lastName')}"
-          th:errors="*{lastName}"
-          class="error"></span>
-    <br>
+        <div class="form-group">
+            <input type="text" th:field="*{lastName}" placeholder="Last name"
+                   class="form-control">
+            <span th:if="${#fields.hasErrors('lastName')}"
+                  th:errors="*{lastName}"
+                  class="error"></span>
+        </div>
 
-    <input type="text" th:field="*{email}" placeholder="Email"
-           class="form-control w-25">
+        <div class="form-group">
+            <input type="text" th:field="*{email}" placeholder="Email"
+                   class="form-control">
+            <span th:if="${#fields.hasErrors('email')}"
+                  th:errors="*{email}"
+                  class="error"></span>
+        </div>
 
-    <span th:if="${#fields.hasErrors('email')}"
-          th:errors="*{email}"
-          class="error"></span>
-    <br>
+        <div class="form-group">
+            <span th:if="${#fields.hasErrors('grade')}"
+                  th:errors="*{grade}"
+                  class="error"></span>
+            <input type="text" th:field="*{grade}" placeholder="Grade"
+                   class="form-control">
+        </div>
 
-    <input type="text" th:field="*{grade}" placeholder="Grade"
-           class="form-control w-25">
-
-    <span th:if="${#fields.hasErrors('grade')}"
-          th:errors="*{grade}"
-          class="error"></span>
-    <br>
-
-    <button type="submit" class="btn btn-info col-2">Save</button>
-</form>
+        <button type="submit" class="btn btn-info">Save</button>
+    </form>
+</div>
 
 </body>
 </html>

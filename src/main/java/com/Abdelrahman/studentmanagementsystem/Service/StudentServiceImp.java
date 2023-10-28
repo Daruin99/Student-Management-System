@@ -6,7 +6,6 @@ import com.Abdelrahman.studentmanagementsystem.Entity.Teacher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class StudentServiceImp implements StudentService {
@@ -18,38 +17,24 @@ public class StudentServiceImp implements StudentService {
     }
 
     @Override
-    public void save(Student student) {
+    public void createStudent(Student student) {
         studentRepo.save(student);
     }
 
     @Override
-    public Student findById(int id) {
-
-        Optional<Student> result =  studentRepo.findById(id);
-        Student theStudent = null;
-
-        if(result.isPresent()) {
-
-            theStudent = result.get();
-        } else {
-            throw  new RuntimeException("This student doesnt exist");
-        }
-        return  theStudent;
+    public Student findStudentById(int id) {
+        return studentRepo.findById(id).get();
     }
 
     @Override
-    public void deleteById(int id) {
+    public void deleteStudentById(int id) {
+
         studentRepo.deleteById(id);
     }
 
-    @Override
-    public List<Student> findAll() {
-        return studentRepo.findAll();
-    }
-
 
     @Override
-    public List<Student> findByTeacher(Teacher teacher){
+    public List<Student> findByTeacher(Teacher teacher) {
         return studentRepo.findByTeacher(teacher);
     }
 }

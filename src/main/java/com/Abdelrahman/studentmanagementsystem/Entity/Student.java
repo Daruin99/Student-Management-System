@@ -12,31 +12,32 @@ public class Student {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "firstName")
+    @Column(name = "first_name")
     @NotNull(message = "This field is required")
     @Size(min = 1, message = "This field is required")
     private String firstName;
 
-    @Column(name = "lastName")
+    @Column(name = "last_name")
     @NotNull(message = "This field is required")
     @Size(min = 1, message = "This field is required")
 
     private String lastName;
 
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     @NotNull(message = "This field is required")
     @Size(min = 1, message = "This field is required")
     @Email(message = "Enter a valid email format")
+
     private String email;
 
     @Column(name = "grade")
     @Min(value = 0, message = "Enter a value greater than 0")
-    @Max(value = 100 , message = "Enter a value less than 100")
+    @Max(value = 100, message = "Enter a value less than 100")
     private Integer grade;
 
 
-    @ManyToOne
-    @JoinColumn(name = "teacher_user_name")
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "teacher_id")
     private Teacher teacher;
 
     public Teacher getTeacher() {
@@ -50,6 +51,14 @@ public class Student {
     public Student() {
     }
 
+
+    public Student(String firstName, String lastName, String email, Integer grade, Teacher teacher) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.grade = grade;
+        this.teacher = teacher;
+    }
 
     public int getId() {
         return id;

@@ -9,11 +9,10 @@ import java.util.Optional;
 public interface StudentService {
 
 
-    void save(Student student);
+    void createStudent(Student student);
 
-    Student findById(int id);
-    void deleteById(int id);
-    List<Student> findAll();
+    Student findStudentById(int id);
+    void deleteStudentById(int id);
 
     public List<Student> findByTeacher(Teacher teacher);
 }
