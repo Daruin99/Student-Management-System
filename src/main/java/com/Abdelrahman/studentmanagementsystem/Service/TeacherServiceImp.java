@@ -19,7 +19,7 @@ public class TeacherServiceImp implements TeacherService{
         this.passwordEncoder = passwordEncoder;
     }
 
-    @Override
+   @Override
     public Teacher findTeacherByUserName(String userName) {
         Teacher teacher = new Teacher();
         return teacherRepo.findByUserName(userName);
@@ -27,13 +27,15 @@ public class TeacherServiceImp implements TeacherService{
 
     @Override
     public void createTeacher(Teacher teacher) throws InvalidPasswordException, UserNameExistsException {
-        if (!isPasswordStrong(teacher.getPassword())) {
-            throw new InvalidPasswordException("Weak password");
-        }
 
         if (doesUserNameExist(teacher.getUserName())) {
             throw new UserNameExistsException("User name exists");
         }
+
+        if (!isPasswordStrong(teacher.getPassword())) {
+            throw new InvalidPasswordException("Weak password");
+        }
+
         teacher.setPassword(passwordEncoder.encode(teacher.getPassword()));
         teacherRepo.save(teacher);
     }
@@ -42,7 +44,7 @@ public class TeacherServiceImp implements TeacherService{
         return password.matches("^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}");
     }
 
-    private Boolean doesUserNameExist(String userName) {
+    private boolean doesUserNameExist(String userName) {
         Teacher teacher = teacherRepo.findByUserName(userName);
         return teacher != null;
     }
